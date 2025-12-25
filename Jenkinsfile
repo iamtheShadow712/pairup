@@ -10,14 +10,10 @@ pipeline{
     }
     post{
         success{
-            steps{
-                echo "Pipeline successfull"
-            }
+            echo "Pipeline successfull"
         }
         failure{
-            steps{
-                echo "Pipeline failed"
-            }
+            echo "Pipeline failed"
         }
     }
 }
