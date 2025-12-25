@@ -3,15 +3,21 @@ pipeline{
 
     stages{
         stage("Checkout Repository"){
-            echo "Repository Checkout"
+            steps{
+                echo "Repository Checkout"
+            }
         }
     }
     post{
         success{
-            echo "Pipeline successfull"
+            steps{
+                echo "Pipeline successfull"
+            }
         }
         failure{
-            echo "Pipeline failed"
+            steps{
+                echo "Pipeline failed"
+            }
         }
     }
 }
