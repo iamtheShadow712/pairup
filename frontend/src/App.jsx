@@ -11,9 +11,9 @@ function App() {
           </SignInButton>
         </SignedOut>
         <SignedIn>
-          <SignOutButton />
+          <UserButton />
         </SignedIn>
-        <UserButton />
+
       </div>
     </div>
   )
