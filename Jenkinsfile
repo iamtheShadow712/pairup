@@ -1,9 +1,9 @@
 pipeline{
     agent {
-        // docker{
-        //     image "node:24.12.0-alpine3.23"
-        // }
-        dockerContainer "node:24.12.0-alpine3.23"
+        docker{
+            image "node:24.12.0-alpine3.23"
+        }
+        // dockerContainer "node:24.12.0-alpine3.23"
     };
 
     tools{
