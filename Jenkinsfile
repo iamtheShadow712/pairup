@@ -1,14 +1,12 @@
 pipeline{
     agent {
         docker{
-            image "node:24-alpine"
+            image "node:24.12.0-alpine3.23"
         }
     };
 
     tools{
         nodejs "nodejs-24.0.0"
-        owasp "owasp-12.1.8"
-        docker "docker"
     }
 
     options{
