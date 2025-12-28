@@ -11,24 +11,48 @@ pipeline{
     }
 
     stages{
-        stage("Checkout Repository"){
+        stage("Checkout Code"){
             steps{
                 checkout scm
             }
         }
-        stage("Node version"){
-            steps{
-                sh 'node --version'
-                sh 'npm --version'
+        stage("Start Build"){
+            stage("Frontend"){
+                stages{
+                    stage("Install Dependencies"){
+                        steps{
+                            dir("./frontend"){
+                                sh "npm install --no-audit"
+                            }
+                        }
+                    }
+                    stage("Audit Dependencies"){
+                        steps{
+                            dir("./frontend"){
+                                sh "npm audit --audit-level=high"
+                            }
+                        }
+                    }
+                }
             }
-        }
-    }
-    post{
-        success{
-            echo "Pipeline successfull"
-        }
-        failure{
-            echo "Pipeline failed"
+            stage("Backend"){
+                stages{
+                    stage("Install Dependencies"){
+                        steps{
+                            dir("./backend"){
+                                sh "npm install --no-audit"
+                            }
+                        }
+                    }
+                    stage("Audit Dependencies"){
+                        steps{
+                            dir("./backend"){
+                                sh "npm audit --audit-level=high"
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
