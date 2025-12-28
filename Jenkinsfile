@@ -51,7 +51,11 @@ pipeline{
                             }
                         }
                         stage("OWASP Dependency-Check Vulnerabilities"){
-                            // agent any
+                            agent {
+                                docker {
+                                    image 'node24-owasp'
+                                }
+                            }
                             steps{
                                 dir("./frontend"){
                                     dependencyCheck additionalArguments: ''' 
@@ -94,6 +98,11 @@ pipeline{
                         }    
                         stage("OWASP Dependency-Check Vulnerabilities"){
                             // agent any
+                            agent {
+                                docker {
+                                    image 'node24-owasp'
+                                }
+                            }
                             steps{
                                 dir("./backend"){
                                     dependencyCheck additionalArguments: ''' 
