@@ -1,8 +1,14 @@
 pipeline{
-    agent any;
+    agent {
+        docker{
+            image "node:24-alpine"
+        }
+    };
 
     tools{
         nodejs "nodejs-24.0.0"
+        owasp "owasp-12.1.8"
+        docker "docker"
     }
 
     options{
@@ -29,11 +35,10 @@ pipeline{
                                                 cacheName: 'frontend/node_modules', 
                                                 cacheValidityDecidingFile: 'package-lock.json', 
                                                 path: 'node_modules'
-                                                )
-                                            ], 
-                                        maxCacheSize: 50
+                                            )], 
+                                        maxCacheSize: 200
                                     ) {
-                                        sh "npm ci --no-audit"
+                                        sh "npm install --no-audit"
                                     }
                                 }
                             }
@@ -58,9 +63,8 @@ pipeline{
                                                 cacheName: 'backend/node_modules', 
                                                 cacheValidityDecidingFile: 'package-lock.json', 
                                                 path: 'node_modules'
-                                                )
-                                            ], 
-                                        maxCacheSize: 50
+                                            )], 
+                                        maxCacheSize: 200
                                     ) {
                                         sh "npm install --no-audit"
                                     }
