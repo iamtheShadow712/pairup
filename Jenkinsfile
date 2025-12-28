@@ -1,8 +1,8 @@
 pipeline{
     agent {
         docker {
-            alwaysPull true
-            image 'node:24.12.0-alpine3.23'
+            // image 'node:24.12.0-alpine3.23'
+            image "node24-owasp:v1"
         }
     }
 
@@ -51,7 +51,7 @@ pipeline{
                             }
                         }
                         stage("OWASP Dependency-Check Vulnerabilities"){
-                            agent any
+                            // agent any
                             steps{
                                 dir("./frontend"){
                                     dependencyCheck additionalArguments: ''' 
@@ -93,7 +93,7 @@ pipeline{
                             }
                         }    
                         stage("OWASP Dependency-Check Vulnerabilities"){
-                            agent any
+                            // agent any
                             steps{
                                 dir("./backend"){
                                     dependencyCheck additionalArguments: ''' 
