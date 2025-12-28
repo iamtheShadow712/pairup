@@ -17,26 +17,23 @@ pipeline{
             }
         }
         stage("Start Build"){
-            stage("Frontend"){
-                stages{
-                    stage("Install Dependencies"){
-                        steps{
-                            dir("./frontend"){
-                                sh "npm install --no-audit"
-                            }
+            stages{
+                stage("Install Dependencies"){
+                    steps{
+                        dir("./frontend"){
+                            sh "npm install --no-audit"
                         }
                     }
-                    stage("Audit Dependencies"){
-                        steps{
-                            dir("./frontend"){
-                                sh "npm audit --audit-level=high"
-                            }
+                }
+                stage("Audit Dependencies"){
+                    steps{
+                        dir("./frontend"){
+                            sh "npm audit --audit-level=high"
                         }
                     }
                 }
             }
-            stage("Backend"){
-                stages{
+            stages{
                     stage("Install Dependencies"){
                         steps{
                             dir("./backend"){
@@ -44,14 +41,13 @@ pipeline{
                             }
                         }
                     }
-                    stage("Audit Dependencies"){
-                        steps{
-                            dir("./backend"){
-                                sh "npm audit --audit-level=high"
-                            }
+                stage("Audit Dependencies"){
+                    steps{
+                        dir("./backend"){
+                            sh "npm audit --audit-level=high"
                         }
                     }
-                }
+                }    
             }
         }
     }
