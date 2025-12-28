@@ -2,13 +2,18 @@ pipeline{
     agent any;
 
     tools{
-        nodejs "node-24.0.0"
+        nodejs "nodejs-24.0.0"
+    }
+
+    options{
+        skipDefaultCheckout true
+        retry(5)
     }
 
     stages{
         stage("Checkout Repository"){
             steps{
-                echo "Repository Checkout"
+                checkout scm
             }
         }
         stage("Node version"){

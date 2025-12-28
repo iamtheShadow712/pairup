@@ -13,7 +13,6 @@ function App() {
         <SignedIn>
           <UserButton />
         </SignedIn>
-
       </div>
     </div>
   )
