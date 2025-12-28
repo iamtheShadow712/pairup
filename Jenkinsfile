@@ -1,9 +1,11 @@
 pipeline{
     agent {
-        docker{
-            image "node:24.12.0-alpine3.23"
+        docker {
+            alwaysPull true
+            image 'node:24.12.0-alpine3.23'
         }
-    };
+    }
+
 
     tools{
         nodejs "nodejs-24.0.0"
