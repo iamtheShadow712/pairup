@@ -50,6 +50,19 @@ pipeline{
                                 }
                             }
                         }
+                        stage("OWASP Dependency-Check Vulnerabilities"){
+                            steps{
+                                dir("./frontend"){
+                                    dependencyCheck additionalArguments: ''' 
+                                        -o './'
+                                        -s './'
+                                        -f 'ALL' 
+                                        --prettyPrint''', odcInstallation: 'owasp-12.1.8'
+
+                                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                                }
+                            }
+                        }
                     }
                 }
                 stage("Backend"){
@@ -78,6 +91,19 @@ pipeline{
                                 }
                             }
                         }    
+                        stage("OWASP Dependency-Check Vulnerabilities"){
+                            steps{
+                                dir("./backend"){
+                                    dependencyCheck additionalArguments: ''' 
+                                        -o './'
+                                        -s './'
+                                        -f 'ALL' 
+                                        --prettyPrint''', odcInstallation: 'owasp-12.1.8'
+
+                                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                                }
+                            }
+                        }
                     }
                 }
             }
