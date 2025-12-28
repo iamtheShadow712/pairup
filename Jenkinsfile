@@ -53,7 +53,7 @@ pipeline{
                         stage("OWASP Dependency-Check Vulnerabilities"){
                             agent {
                                 docker {
-                                    image 'node24-owasp'
+                                    image 'node24-owasp:v1'
                                 }
                             }
                             steps{
@@ -100,7 +100,7 @@ pipeline{
                             // agent any
                             agent {
                                 docker {
-                                    image 'node24-owasp'
+                                    image 'node24-owasp:v1'
                                 }
                             }
                             steps{
