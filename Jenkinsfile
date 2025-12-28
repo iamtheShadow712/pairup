@@ -51,6 +51,7 @@ pipeline{
                             }
                         }
                         stage("OWASP Dependency-Check Vulnerabilities"){
+                            agent any
                             steps{
                                 dir("./frontend"){
                                     dependencyCheck additionalArguments: ''' 
@@ -92,6 +93,7 @@ pipeline{
                             }
                         }    
                         stage("OWASP Dependency-Check Vulnerabilities"){
+                            agent any
                             steps{
                                 dir("./backend"){
                                     dependencyCheck additionalArguments: ''' 
