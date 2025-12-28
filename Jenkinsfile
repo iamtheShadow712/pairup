@@ -17,37 +17,43 @@ pipeline{
             }
         }
         stage("Start Build"){
-            stages{
-                stage("Install Dependencies"){
-                    steps{
-                        dir("./frontend"){
-                            sh "npm install --no-audit"
+            parallel{
+                stage("Frontend"){
+                    stages{
+                        stage("Install Dependencies"){
+                            steps{
+                                dir("./frontend"){
+                                    sh "npm install --no-audit"
+                                }
+                            }
                         }
-                    }
-                }
-                stage("Audit Dependencies"){
-                    steps{
-                        dir("./frontend"){
-                            sh "npm audit --audit-level=high"
-                        }
-                    }
-                }
-            }
-            stages{
-                    stage("Install Dependencies"){
-                        steps{
-                            dir("./backend"){
-                                sh "npm install --no-audit"
+                        stage("Audit Dependencies"){
+                            steps{
+                                dir("./frontend"){
+                                    sh "npm audit --audit-level=high"
+                                }
                             }
                         }
                     }
-                stage("Audit Dependencies"){
-                    steps{
-                        dir("./backend"){
-                            sh "npm audit --audit-level=high"
+                }
+                stage("Backend"){
+                    stages{
+                        stage("Install Dependencies"){
+                            steps{
+                                dir("./backend"){
+                                    sh "npm install --no-audit"
+                                }
+                            }
                         }
+                        stage("Audit Dependencies"){
+                            steps{
+                                dir("./backend"){
+                                    sh "npm audit --audit-level=high"
+                                }
+                            }
+                        }    
                     }
-                }    
+                }
             }
         }
     }
