@@ -23,7 +23,18 @@ pipeline{
                         stage("Install Dependencies"){
                             steps{
                                 dir("./frontend"){
-                                    sh "npm install --no-audit"
+                                    cache(
+                                        caches: [
+                                            arbitraryFileCache(
+                                                cacheName: 'frontend/node_modules', 
+                                                cacheValidityDecidingFile: 'package-lock.json', 
+                                                path: 'node_modules'
+                                                )
+                                            ], 
+                                        maxCacheSize: 50
+                                    ) {
+                                        sh "npm ci --no-audit"
+                                    }
                                 }
                             }
                         }
@@ -41,7 +52,18 @@ pipeline{
                         stage("Install Dependencies"){
                             steps{
                                 dir("./backend"){
-                                    sh "npm install --no-audit"
+                                    cache(
+                                        caches: [
+                                            arbitraryFileCache(
+                                                cacheName: 'backend/node_modules', 
+                                                cacheValidityDecidingFile: 'package-lock.json', 
+                                                path: 'node_modules'
+                                                )
+                                            ], 
+                                        maxCacheSize: 50
+                                    ) {
+                                        sh "npm install --no-audit"
+                                    }
                                 }
                             }
                         }
